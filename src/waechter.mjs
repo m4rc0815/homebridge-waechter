@@ -106,7 +106,16 @@ export async function lauf(argv = process.argv.slice(2)) {
   // --- Melden -----------------------------------------------------------
   const meldung = baueMeldung({ neu, behoben, pingUserId: k.discord.pingUserId });
   if (trocken) {
-    console.log(JSON.stringify({ befundeGesamt: befunde.length, befunde, neu, behoben }, null, 2));
+    console.log(JSON.stringify({
+      geprueft: {
+        childBridges: bridges.length,
+        geraete: accessories.length,
+        journalZeilen: journal.length,
+        system: systemwerte,
+      },
+      befundeGesamt: befunde.length,
+      befunde, neu, behoben,
+    }, null, 2));
   } else if (meldung) {
     const e = await sendeAnDiscord(k.discord.webhook, meldung);
     console.log(`Discord: ${e.ok ? 'gesendet' : `fehlgeschlagen (${e.fehler ?? e.status})`}`);

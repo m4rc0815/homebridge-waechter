@@ -44,3 +44,13 @@ test('unbekannte Statuswerte werden als Warnung gemeldet, nicht verschluckt', ()
   assert.equal(b.length, 1);
   assert.equal(b[0].schwere, 'warnung');
 });
+
+test('Status "ok" ist gesund — Homebridge 2.4.0 meldet ok statt up', () => {
+  assert.deepEqual(pruefeDienst({ status: 'ok' }), [],
+    'am 07.09.2026 auf der echten Anlage nachgemessen: die API liefert "ok"');
+});
+
+test('wirklich unbekannter Status meldet weiterhin', () => {
+  assert.equal(pruefeDienst({ status: 'zombie' }).length, 1);
+  assert.equal(pruefeDienst({}).length, 1, 'gar keine Antwort ist ein echter Ausfall');
+});

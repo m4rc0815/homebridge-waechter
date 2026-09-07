@@ -3,9 +3,15 @@
 
 import { befund, SCHWERE } from '../befund.mjs';
 
+// Homebridge 2.4.0 / UI 5.29.0 meldet "ok"; aeltere Faassungen "up". Beide sind
+// gesund, "pending" heisst nur "startet gerade". Am 07.09.2026 auf der echten
+// Anlage nachgemessen — die Annahme "up" allein war falsch und erzeugte einen
+// Dauer-Fehlalarm auf einem voellig intakten System.
+const DIENST_GESUND = new Set(['ok', 'up', 'pending']);
+
 export function pruefeDienst(status) {
   const wert = status?.status;
-  if (wert === 'up' || wert === 'pending') return [];
+  if (DIENST_GESUND.has(wert)) return [];
   return [befund({
     bereich: 'dienst',
     schluessel: 'homebridge',
@@ -14,6 +20,8 @@ export function pruefeDienst(status) {
     text: `Status: ${wert ?? 'unbekannt'}. HomeKit erreicht derzeit keines der Geräte.`,
   })];
 }
+
+export { DIENST_GESUND };
 
 export function pruefeBridges(bridges = []) {
   const raus = [];
