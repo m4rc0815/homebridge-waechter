@@ -65,7 +65,7 @@ Alle Prüfmodule liefern denselben Typ (`Befund[]`) und bekommen ihre Daten übe
   "type": "module",
   "description": "Überwacht Homebridge auf Dienst-, Bridge-, Sensor- und Systemfehler und meldet Auffälligkeiten per Discord",
   "scripts": {
-    "test": "node --test test/",
+    "test": "node --test test/*.test.mjs",
     "pruefen": "node src/waechter.mjs",
     "trockenlauf": "node src/waechter.mjs --trocken"
   },
