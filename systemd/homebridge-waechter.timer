@@ -1,0 +1,11 @@
+[Unit]
+Description=Homebridge-Wächter alle 15 Minuten
+
+[Timer]
+OnCalendar=*:0/15
+Persistent=true
+RandomizedDelaySec=30
+Unit=homebridge-waechter.service
+
+[Install]
+WantedBy=timers.target
