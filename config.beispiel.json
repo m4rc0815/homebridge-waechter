@@ -1,0 +1,15 @@
+{
+  "homebridge": {
+    "url": "http://localhost:8581",
+    "benutzer": "waechter",
+    "passwort": "HIER-DAS-PASSWORT-DES-WAECHTER-BENUTZERS"
+  },
+  "discord": {
+    "webhook": "HIER-DIE-WEBHOOK-URL",
+    "pingUserId": "HIER-DEINE-DISCORD-USER-ID"
+  },
+  "takt": { "wartungVon": "03:55", "wartungBis": "04:10", "berichtUm": "07:00", "entprellung": 2 },
+  "schwellen": { "frischeStunden": 6, "platteProzent": 85, "ramProzent": 90, "tempGrad": 75 },
+  "sensorAusnahmen": [],
+  "zustandsdatei": "/var/lib/homebridge-waechter/zustand.json"
+}

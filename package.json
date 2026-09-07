@@ -1,0 +1,13 @@
+{
+  "name": "homebridge-waechter",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Überwacht Homebridge auf Dienst-, Bridge-, Sensor- und Systemfehler und meldet Auffälligkeiten per Discord",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "pruefen": "node src/waechter.mjs",
+    "trockenlauf": "node src/waechter.mjs --trocken"
+  },
+  "engines": { "node": ">=20" }
+}

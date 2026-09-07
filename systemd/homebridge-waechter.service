@@ -1,0 +1,13 @@
+[Unit]
+Description=Homebridge-Wächter — Prüflauf
+After=homebridge.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/homebridge-waechter
+ExecStart=/opt/homebridge/bin/node /opt/homebridge-waechter/src/waechter.mjs
+TimeoutStartSec=120
+StandardOutput=journal
+StandardError=journal
