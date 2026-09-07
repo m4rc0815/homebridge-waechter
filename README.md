@@ -11,14 +11,26 @@ Läuft als systemd-Timer alle 15 Minuten. **Keine Laufzeit-Abhängigkeiten** —
 | Dienst | Homebridge antwortet nicht | kritisch |
 | Child Bridges | Bridge auf `down` (von Hand gestoppte ausgenommen) | kritisch |
 | Sensoren | Gerät liefert gar keine Werte mehr | kritisch |
+| Sensoren | `StatusLowBattery` gesetzt → Batterie schwach | warnung |
+| Sensoren | `StatusFault` gesetzt → Gerät meldet Störung | warnung |
 | Sensoren | Messwert seit > 6 h unverändert | warnung |
 | Log | `TypeError` / Speichermangel im journal | kritisch |
 | Log | `ERROR`, Verbindungsabbrüche | warnung |
 | System | Platte ≥ 85 % | kritisch |
 | System | RAM ≥ 90 %, Temperatur ≥ 75 °C, Pi drosselt | warnung |
 
-Kontakt-, Bewegungs- und Schaltgeräte werden **nicht** auf Frische geprüft —
-dort ist ein unveränderter Wert der Normalfall.
+Auf **Frische** wird nur geprüft, was sich physikalisch ständig ändert:
+Temperatur, Luftfeuchte, Luftqualität. Bewusst ausgenommen, weil dort Stillstand
+der Normalfall ist und täglich Fehlalarme entstünden:
+
+- **Batteriestände** — stehen tage- bis wochenlang auf demselben Wert
+- **Helligkeit** — nachts konstant am Minimum, im Winter 14 Stunden lang
+- **Verbrauch, Spannung, Strom** — konstant 0, solange nichts eingeschaltet ist
+- **Kontakt-, Bewegungs-, Schalt- und Positionsgeräte** — Stillstand ist gesund
+
+Für Batterien gibt es stattdessen die verlässliche Prüfung: das Gerät meldet
+`StatusLowBattery` selbst. `humanType` wird vor dem Vergleich normalisiert, weil
+Homebridge Typen mit Leerzeichen schreibt (`Leak Sensor`, nicht `LeakSensor`).
 
 ## Wann gemeldet wird
 
